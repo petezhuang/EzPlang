@@ -1,4 +1,5 @@
 #pragma once
+#pragma once
 #include<iostream>
 #include<string>
 #include<vector>
@@ -22,10 +23,10 @@ public:
 	token() {}
 	token(char cha) { type = CHAR; ch = cha; }
 	token(string ch) { type = STRING; str = ch; }
-	token(string ch,int a) { type = OPERATOR; op = ch; }
-	token(string ch,int a,int b) { type = VAL; val = ch; }
-	token(string ch,int a,int b,int c) { type = KEYWORD; keyword = ch; }
-	token(def x,double a) { type = NUM; num = x; }
+	token(string ch, int a) { type = OPERATOR; op = ch; }
+	token(string ch, int a, int b) { type = VAL; val = ch; }
+	token(string ch, int a, int b, int c) { type = KEYWORD; keyword = ch; }
+	token(def x, double a) { type = NUM; num = x; }
 	void reset() {
 		val = "";
 		keyword = "";
@@ -176,8 +177,8 @@ vector<token> lexer(string s) {
 				i++;
 			}
 			i--;
-			if (is_decima == true) ans.push_back(token(stof(tmpdigit),1.1));
-			else ans.push_back(token(stoi(tmpdigit),1.1));
+			if (is_decima == true) ans.push_back(token(stof(tmpdigit), 1.1));
+			else ans.push_back(token(stoi(tmpdigit), 1.1));
 			continue;
 		}
 		exit(1);
@@ -185,7 +186,8 @@ vector<token> lexer(string s) {
 	for (int i = 0; i < ans.size(); i++) {
 		if (ans[i].type == OPERATOR) {
 			if (ans[i].op == "+" || ans[i].op == "-") {
-				if (i == 0 || ans[i - 1].op == "(" || ans[i - 1].op == "=" || ans[i - 1].op == "\n") {
+				if (i == 0 || ans[i - 1].op == "(" || ans[i - 1].op == "=" || ans[i - 1].op == "\n" || ans[i - 1].op == ">=" || ans[i - 1].op == "<=" || ans[i - 1].op == "==" || ans[i - 1].op == ">" || ans[i - 1].op == "<")
+				{
 					if (ans[i].op == "+") ans[i].op = "pos";
 					if (ans[i].op == "-") ans[i].op = "neg";
 				}

@@ -2,11 +2,29 @@
 #include"lexer.h"
 #include"val.h"
 #include"expression.h"
+#include"parser.h"
+#include <fstream>
 using namespace std;
+string readTxtFile(const string& filename) {
+    ifstream file(filename);
+    string content, line;
+    if (file.is_open()) {
+        while (getline(file, line)) {
+            content += line + "\n";
+        }
+        content += "\n";
+        file.close();
+    }
+    else {
+        cout << "Unable to open txt" << endl;
+    }
+    return content;
+}
+
 int main() {
-	setlevel();
-	string a = "x=(-3+10*2)%5 y=-x*10.1";
-	vector<token> tokens = lexer(a);
-	expression(0, 11, tokens);
-	cout << expression(12, 17, tokens);
+    string filename = "test.txt";
+    string a = readTxtFile(filename);
+    setlevel();
+    vector<token> tokens = lexer(a);
+    parser(0, tokens.size() - 1, tokens);
 }

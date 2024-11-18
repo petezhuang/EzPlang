@@ -1,4 +1,5 @@
 #pragma once
+#pragma once
 #include<iostream>
 #include<string>
 #include<map>
@@ -14,21 +15,30 @@ void setlevel() {
 }
 enum Type { INT, DOU, CHAR, NUM, KEYWORD, OPERATOR, VAL, STRING };
 class def {
-private:
+	//unsigned long long address;
+public:
 	long long int_val;
 	double dou_val;
 	char char_val;
-	unsigned long long address;
-public:
-	bool is_array;
+	//bool is_array;
 	Type type;
+	long long get_int() { return int_val; }
+	double get_dou() { return dou_val; }
+	char get_char() { return char_val; }
 	def() {}
 	def(bool val) { int_val = val; type = INT; }
 	def(long long val) { int_val = val; type = INT; }
 	def(int val) { int_val = val; type = INT; }
 	def(double val) { dou_val = val; type = DOU; }
 	def(char val) { char_val = val; type = CHAR; }
-	friend ostream & operator << (ostream& out, const def& x);
+	bool to_bool() {
+		if (type == INT)
+			if (int_val == 0) return false;
+		if (type == DOU)
+			if (dou_val == 0) return false;
+		return true;
+	}
+	friend ostream& operator << (ostream& out, const def& x);
 	friend def operator +(def a, def b);
 	friend def operator -(def a, def b);
 	friend def operator *(def a, def b);

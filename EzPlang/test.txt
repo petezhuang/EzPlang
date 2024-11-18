@@ -1,0 +1,13 @@
+def a,b
+output("please input two nums:\n")
+intinput(a,b)
+if(a>b){
+output("a is bigger than b")
+}else {
+if(a==b){
+output("a is the same with b")
+}
+if(a<b){
+output("a is smaller than b")
+}
+}
